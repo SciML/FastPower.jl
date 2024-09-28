@@ -42,6 +42,6 @@ end
     @test ForwardDiff.derivative(x -> fastpow(x, x+y), x) ≈
           ForwardDiff.derivative(x -> ^(x, x+y), x)
     @test Tracker.gradient(x -> fastpow(x, x+y), x)[1] ≈ Tracker.gradient(x -> ^(x, x+y), x)[1]
-    @test ReverseDiff.gradient(x -> fastpow(x[1], x+y), [x])[1] ≈
-          ReverseDiff.gradient(x -> ^(x[1], x+y), [x])[1]
+    @test ReverseDiff.gradient(x -> fastpow(x[1], x[1]+y), [x])[1] ≈
+          ReverseDiff.gradient(x -> ^(x[1], x[1]+y), [x])[1]
 end
