@@ -1,5 +1,5 @@
 using FastPower
-using FastPower: fastlog2, fastpow
+using FastPower: fastlog2, fastpower
 using Enzyme, EnzymeTestUtils
 using ForwardDiff, ReverseDiff, Tracker
 using Test
@@ -11,9 +11,9 @@ using Test
 end
 
 @testset "Fast pow" begin
-    @test fastpow(1, 1) isa Float64
-    @test fastpow(1.0, 1.0) isa Float64
-    errors = [abs(^(x, y) - fastpow(x, y)) for x in 0.001:0.001:1, y in 0.08:0.001:0.5]
+    @test fastpower(1, 1) isa Float64
+    @test fastpower(1.0, 1.0) isa Float64
+    errors = [abs(^(x, y) - fastpower(x, y)) for x in 0.001:0.001:1, y in 0.08:0.001:0.5]
     @test maximum(errors) < 1e-4
 end
 
@@ -24,7 +24,7 @@ end
 
         x = 3.0
         y = 2.0
-        @test_skip test_forward(fastpow, RT, (x, Tx), (y, Ty), atol = 1e-10)
+        @test_skip test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
     end
 end
 
@@ -32,17 +32,17 @@ end
     @testset for RT in (Active,), Tx in (Active,), Ty in (Active,)
         x = 2.0
         y = 3.0
-        @test_skip test_reverse(fastpow, RT, (x, Tx), (y, Ty), atol = 1e-10)
+        @test_skip test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
     end
 end
 
 @testset "Fast pow - Other AD Engines" begin
     x = 1.5123233245141
     y = 2.2342351513252
-    @test ForwardDiff.derivative(x -> fastpow(x, x + y), x) ≈
+    @test ForwardDiff.derivative(x -> fastpower(x, x + y), x) ≈
           ForwardDiff.derivative(x -> ^(x, x + y), x)
-    @test Tracker.gradient(x -> fastpow(x, x + y), x)[1] ≈
+    @test Tracker.gradient(x -> fastpower(x, x + y), x)[1] ≈
           Tracker.gradient(x -> ^(x, x + y), x)[1]
-    @test ReverseDiff.gradient(x -> fastpow(x[1], x[1] + y), [x])[1] ≈
+    @test ReverseDiff.gradient(x -> fastpower(x[1], x[1] + y), [x])[1] ≈
           ReverseDiff.gradient(x -> ^(x[1], x[1] + y), [x])[1]
 end

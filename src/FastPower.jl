@@ -57,10 +57,10 @@ const EXP2FT = (
 )
 
 """
-    fastpow(x::T, y::T) where {T} -> float(T)
+    fastpower(x::T, y::T) where {T} -> float(T)
     Trips through Float32 for performance.
 """
-@inline function fastpow(x::T, y::T) where {T <: Real}
+@inline function fastpower(x::T, y::T) where {T <: Real}
     outT = float(T)
     if iszero(x)
         return zero(outT)
@@ -74,6 +74,6 @@ const EXP2FT = (
     end
 end
 
-@inline fastpow(x, y) = x^y
+@inline fastpower(x, y) = x^y
 
 end

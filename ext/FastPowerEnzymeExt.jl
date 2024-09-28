@@ -1,9 +1,9 @@
 module FastPowerEnzymeExt
 
 using FastPower
-import FastPower: fastpow
+import FastPower: fastpower
 using Enzyme
 
-Enzyme.Compiler.known_ops[typeof(FastPower.fastpow)] = (:pow, 2, nothing)
+Enzyme.Compiler.known_ops[typeof(FastPower.fastpower)] = (:pow, 2, nothing)
 
 end
