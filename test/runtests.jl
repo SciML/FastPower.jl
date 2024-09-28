@@ -29,10 +29,7 @@ end
 end
 
 @testset "Fast pow - Enzyme reverse rule" begin
-    @testset for RT in (Active,),
-        Tx in (Active,),
-        Ty in (Active,)
-
+    @testset for RT in (Active,), Tx in (Active,), Ty in (Active,)
         x = 2.0
         y = 3.0
         @test_skip test_reverse(fastpow, RT, (x, Tx), (y, Ty), atol = 1e-10)
@@ -42,7 +39,9 @@ end
 @testset "Fast pow - Other AD Engines" begin
     x = 1.5123233245141
     y = 2.2342351513252
-    @test ForwardDiff.derivative(x->fastpow(x,y), x) ≈ ForwardDiff.derivative(x->^(x,y), x)
-    @test Tracker.gradient(x->fastpow(x,y), x)[1] ≈ Tracker.gradient(x->^(x,y), x)[1]
-    @test ReverseDiff.gradient(x->fastpow(x[1],y), [x])[1] ≈ ReverseDiff.gradient(x->^(x[1],y), [x])[1]
+    @test ForwardDiff.derivative(x -> fastpow(x, y), x) ≈
+          ForwardDiff.derivative(x -> ^(x, y), x)
+    @test Tracker.gradient(x -> fastpow(x, y), x)[1] ≈ Tracker.gradient(x -> ^(x, y), x)[1]
+    @test ReverseDiff.gradient(x -> fastpow(x[1], y), [x])[1] ≈
+          ReverseDiff.gradient(x -> ^(x[1], y), [x])[1]
 end

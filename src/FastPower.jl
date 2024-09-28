@@ -37,7 +37,8 @@ end
 # Float32, whereas OpenLibm uses Float64
 #
 # https://github.com/JuliaMath/openlibm/blob/cca41bc1abd01804afa4862bbd2c79cc9803171a/src/s_exp2f.c
-const EXP2FT = (Float32(0x1.6a09e667f3bcdp-1),
+const EXP2FT = (
+    Float32(0x1.6a09e667f3bcdp-1),
     Float32(0x1.7a11473eb0187p-1),
     Float32(0x1.8ace5422aa0dbp-1),
     Float32(0x1.9c49182a3f090p-1),
@@ -52,20 +53,24 @@ const EXP2FT = (Float32(0x1.6a09e667f3bcdp-1),
     Float32(0x1.306fe0a31b715p+0),
     Float32(0x1.3dea64c123422p+0),
     Float32(0x1.4bfdad5362a27p+0),
-    Float32(0x1.5ab07dd485429p+0))
+    Float32(0x1.5ab07dd485429p+0)
+)
 
 """
     fastpow(x::T, y::T) where {T} -> float(T)
     Trips through Float32 for performance.
 """
-@inline function fastpow(x::T, y::T) where {T<:Real}
+@inline function fastpow(x::T, y::T) where {T <: Real}
     outT = float(T)
     if iszero(x)
         return zero(outT)
     elseif isinf(x) && isinf(y)
-        return convert(outT,Inf)
+        return convert(outT, Inf)
     else
-        return convert(outT,@fastmath exp2(convert(Float32, y) * fastlog2(convert(Float32, x))))
+        return convert(
+            outT,
+            @fastmath exp2(convert(Float32, y) * fastlog2(convert(Float32, x)))
+        )
     end
 end
 
