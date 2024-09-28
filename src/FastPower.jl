@@ -49,4 +49,7 @@ end
 
 fastpower(x, y) = x^y
 
+using Enzyme
+Enzyme.Compiler.known_ops[typeof(fastpower)] = (:pow, 2, nothing)
+
 end
