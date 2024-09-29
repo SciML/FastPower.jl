@@ -24,7 +24,7 @@ end
 
         x = 3.0
         y = 2.0
-        @test_skip test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
+        test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
     end
 end
 
@@ -32,7 +32,7 @@ end
     @testset for RT in (Active,), Tx in (Active,), Ty in (Active,)
         x = 2.0
         y = 3.0
-        @test_skip test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
+        test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
     end
 end
 
