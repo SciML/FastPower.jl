@@ -29,9 +29,14 @@ That's it. That's all there is.
 The name simply derives from the Julia standard of `x_fast` for things that are approximations.
 FastPower is simply the the `^_fast` or `pow_fast` function, following the standard conventions
 developed from Base. However, this differs from the `pow_fast` you get from Base which is still
-a lot more accurate. `FastPower.fastpower` loses about 6 digits of accuracy on Float64, so it's
-about 10 digits of accuracy. For many applications, such as solving differential equations to
-6 digits of accuracy, this can 
+a lot more accurate. `FastPower.fastpower` loses about 12 digits of accuracy on Float64, so it's
+about 3-4 digits of accuracy. For many applications, such as the adaptivity algorithm when 
+solving differential equations, this can be a sufficient amount of accuracy for a power 
+function approximation.
+
+This approximation is tested for the range of `x^y` where `x>=0` and `y>=0`. If `x<=1`, then
+the approximation is accurate for very large values of `y`. If `x<100`, then the approximation
+is accurate for `y<1`. If `x>100`, or if `x` is large and `y` is large, caution should be used. 
 
 ## What about FastPow.jl?
 
