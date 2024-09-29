@@ -28,23 +28,23 @@ end
         Tx in (Const, Duplicated),
         Ty in (Const, Duplicated)
 
-        x = 3.0
-        y = 2.0
-        test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-1, rtol=1e-1)
+        x = 1.0
+        y = 0.5
+        test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-4, rtol=1e-3)
     end
 end
 
 @testset "Fast pow - Enzyme reverse rule" begin
     @testset for RT in (Active,), Tx in (Active,), Ty in (Active,)
-        x = 2.0
-        y = 3.0
-        test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-1, rtol=1e-1)
+        x = 1.0
+        y = 0.5
+        test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-4, rtol=1e-3)
     end
 end
 
 @testset "Fast pow - Other AD Engines" begin
     x = 1.5123233245141
-    y = 2.2342351513252
+    y = 0.22352354326
     @test ForwardDiff.derivative(x -> fastpower(x, x + y), x) ≈
           ForwardDiff.derivative(x -> ^(x, x + y), x)
     @test Tracker.gradient(x -> fastpower(x, x + y), x)[1] ≈
