@@ -30,6 +30,7 @@ jobs:
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: IntegratorsII}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: RegressionI}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: RegressionII}
+          - {user: SciML, repo: SimpleDiffEq.jl, group: Core}
 
     steps:
       - uses: actions/checkout@v4
