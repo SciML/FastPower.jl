@@ -15,6 +15,12 @@ end
     @test fastpower(1.0, 1.0) isa Float64
     errors = [abs(^(x, y) - fastpower(x, y)) for x in 0.001:0.001:1, y in 0.08:0.001:0.5]
     @test maximum(errors) < 1e-4
+
+    errors = [abs(^(x, y) - fastpower(x, y)) for x in 0.001:0.001:1, y in 0.08:0.001:1000.0]
+    @test maximum(errors) < 1e-3
+
+    errors = [abs(^(x, y) - fastpower(x, y)) for x in 0.001:0.001:100, y in 0.08:0.001:1.0]
+    @test maximum(errors) < 1e-2
 end
 
 @testset "Fast pow - Enzyme forward rule" begin
@@ -24,7 +30,7 @@ end
 
         x = 3.0
         y = 2.0
-        @test_skip test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
+        test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-1, rtol=1e-1)
     end
 end
 
@@ -32,7 +38,7 @@ end
     @testset for RT in (Active,), Tx in (Active,), Ty in (Active,)
         x = 2.0
         y = 3.0
-        @test_skip test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-10)
+        test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-1, rtol=1e-1)
     end
 end
 
