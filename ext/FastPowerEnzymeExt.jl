@@ -3,13 +3,16 @@ module FastPowerEnzymeExt
 using FastPower
 import FastPower: fastpower
 using Enzyme
+using Enzyme.EnzymeRules: FwdConfig
 
-function Enzyme.EnzymeRules.forward(func::Const{typeof(fastpower)},
+function Enzyme.EnzymeRules.forward(config::FwdConfig,
+        func::Const{typeof(FastPower.fastpower)},
         RT::Type{<:Union{Duplicated, DuplicatedNoNeed}},
         _x::Union{Const, Duplicated}, _y::Union{Const, Duplicated})
     x = _x.val
     y = _y.val
     ret = func.val(x, y)
+    T = typeof(ret)
     if !(_x isa Const) 
         dxval = _x.dval * y * (fastpower(x,y - 1))  
     else 
@@ -21,9 +24,9 @@ function Enzyme.EnzymeRules.forward(func::Const{typeof(fastpower)},
         dyval = make_zero(_y.val)
     end 
     if RT <: DuplicatedNoNeed
-        return Float32(dxval + dyval)
+        return convert(T,dxval + dyval)
     else
-        return Duplicated(ret, Float32(dxval + dyval))
+        return Duplicated(ret, convert(T, dxval + dyval))
     end
 end
 
