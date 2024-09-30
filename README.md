@@ -40,24 +40,25 @@ is accurate for `y<1`. If `x>100`, or if `x` is large and `y` is large, caution 
 
 ## What about FastPow.jl?
 
-These two packages are completely unrelated since FastPow.jl is a specialization for integer powers.
+These two packages are completely unrelated since [FastPow.jl](https://github.com/JuliaMath/FastPow.jl) is a specialization for *literal* integer powers: powers that are not only
+integers but appear as literal constants in the source code.
 It does things like:
 
 ```julia
-2^5
+x^5
 ```
 
 which can be computed via:
 
 ```julia
-sq = 2^2
+sq = x^2
 fourth = sq^2
 fourth * 2
 ```
 
-This is a bit faster than `^(::AbstractFloat, Integer)` but with a bit of accuracy loss.
+This is faster than `^(::AbstractFloat, Integer)` but with a bit of accuracy loss.
 
-Meanwhile, FastPower.jl is all about floating point powers. 
+Meanwhile, FastPower.jl is all about floating-point powers and powers whose value is only known at runtime. 
 
 ## Why is this not in Base?
 
