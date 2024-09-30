@@ -58,7 +58,7 @@ fourth * 2
 
 This is faster than `^(::AbstractFloat, Integer)` but with a bit of accuracy loss.
 
-Meanwhile, FastPower.jl is all about floating-point powers and powers whose value is only known at runtime. 
+Meanwhile, FastPower.jl is all about floating-point powers (whose value may only be known at runtime). 
 
 ## Why is this not in Base?
 
