@@ -48,7 +48,7 @@ It does things like:
 x^5
 ```
 
-which can be computed via:
+which is transformed by the `@fastpow` macro to be computed via:
 
 ```julia
 sq = x^2
@@ -56,7 +56,8 @@ fourth = sq^2
 fourth * 2
 ```
 
-This is faster than `^(::AbstractFloat, Integer)` but with a bit of accuracy loss.
+This is faster than `^(::AbstractFloat, Integer)` but with a bit of accuracy loss compared to
+what LLVM generates by default for `x^5`.
 
 Meanwhile, FastPower.jl is all about floating-point powers (whose value may only be known at runtime). 
 
