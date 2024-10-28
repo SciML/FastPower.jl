@@ -35,7 +35,7 @@ end
 end
 
 @testset "Fast pow - Enzyme reverse rule" begin
-    @testset for RT in (Active,), Tx in (Active,), Ty in (Active,)
+    @testset for RT in (Active,), Tx in (Active, Const), Ty in (Active, Const)
         x = 1.0
         y = 0.5
         test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-4, rtol=1e-3)
