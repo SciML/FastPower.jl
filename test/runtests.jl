@@ -1,7 +1,7 @@
 using FastPower
 using FastPower: fastlog2, fastpower
 using Enzyme, EnzymeTestUtils
-using ForwardDiff, ReverseDiff, Tracker
+using ForwardDiff, ReverseDiff, Tracker, Mooncake
 using Test
 
 @testset "Fast log2" begin
@@ -42,6 +42,7 @@ end
     end
 end
 
+mooncake_derivative(f,x) = Mooncake.value_and_gradient!!(Mooncake.build_rrule(f, x), f, x)[2][2]
 @testset "Fast pow - Other AD Engines" begin
     x = 1.5123233245141
     y = 0.22352354326
@@ -51,4 +52,6 @@ end
           Tracker.gradient(x -> ^(x, x + y), x)[1]
     @test ReverseDiff.gradient(x -> fastpower(x[1], x[1] + y), [x])[1] ≈
           ReverseDiff.gradient(x -> ^(x[1], x[1] + y), [x])[1]
+    @test mooncake_derivative(x -> fastpower(x, x + y), x) ≈
+          mooncake_derivative(x -> ^(x, x + y), x)
 end
