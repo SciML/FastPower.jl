@@ -30,7 +30,7 @@ end
 
         x = 1.0
         y = 0.5
-        test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-4, rtol=1e-3)
+        test_forward(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-4, rtol = 1e-3)
     end
 end
 
@@ -38,11 +38,13 @@ end
     @testset for RT in (Active,), Tx in (Active, Const), Ty in (Active, Const)
         x = 1.0
         y = 0.5
-        test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-4, rtol=1e-3)
+        test_reverse(fastpower, RT, (x, Tx), (y, Ty), atol = 1e-4, rtol = 1e-3)
     end
 end
 
-mooncake_derivative(f,x) = Mooncake.value_and_gradient!!(Mooncake.build_rrule(f, x), f, x)[2][2]
+function mooncake_derivative(f, x)
+    Mooncake.value_and_gradient!!(Mooncake.build_rrule(f, x), f, x)[2][2]
+end
 @testset "Fast pow - Other AD Engines" begin
     x = 1.5123233245141
     y = 0.22352354326
