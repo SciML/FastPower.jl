@@ -69,7 +69,7 @@ the less accuracy and more speed is appropriate for your needs. Arguably, FastMa
 split from Base.
 
 Also, one major purpose of this package is to allow for the bithacking to be held in a place 
-that allows for extensions which enable compatbility with automatic differentiation. Extensions
+that allows for extensions which enable compatibility with automatic differentiation. Extensions
 for:
 
 * Enzyme
