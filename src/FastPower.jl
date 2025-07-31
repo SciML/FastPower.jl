@@ -11,7 +11,7 @@ module FastPower
     c = 0.523692f0
     # IEEE is sgn(1):exp(8):frac(23) representing
     # (1+frac)*2^(exp-127). 1+frac is called the significand
-    
+
     # get exponent
     ux1i = reinterpret(UInt32, x)
     exp = Int32((ux1i & 0x7F800000) >> 23)
@@ -24,7 +24,7 @@ module FastPower
         ux2i = (ux1i & 0x007FFFFF) | 0x3f000000
         exp -= 0x7e # 126 instead of 127 compensates for division by 2
     end
-    signif = reinterpret(Float32, ux2i) 
+    signif = reinterpret(Float32, ux2i)
     quot = muladd(signif, a, b) / (signif + c)
     return muladd(signif - 1.0f0, quot, exp)
 end
