@@ -24,7 +24,7 @@ FastPowerReverseDiffExt = "ReverseDiff"
 FastPowerTrackerExt = "Tracker"
 
 [compat]
-Enzyme = "0.13"
+Enzyme = "0.13.89"
 ForwardDiff = "0.10, 1"
 Measurements = "2"
 MonteCarloMeasurements = "1"
