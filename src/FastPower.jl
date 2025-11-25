@@ -1,5 +1,4 @@
 module FastPower
-
 # From David Goldberg's blog post with minor modifications
 # https://tech.ebayinc.com/engineering/fast-approximate-logarithms-part-iii-the-formulas/
 @inline function fastlog2(x::Float32)::Float32
