@@ -82,3 +82,4 @@ for:
 currently exist for this function. More can be added on-demand. This allows for `pow_fast` to be
 safe in most AD contexts, though in some cases improved extensions could be created which
 improve performance.
+
