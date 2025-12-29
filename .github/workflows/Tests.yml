@@ -24,6 +24,10 @@ jobs:
           - "pre"
         group:
           - Core
+          - Enzyme
+        exclude:
+          - version: "pre"
+            group: Enzyme
     uses: "SciML/.github/.github/workflows/tests.yml@v1"
     with:
       julia-version: "${{ matrix.version }}"
