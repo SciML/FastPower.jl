@@ -1,8 +1,18 @@
-using FastPower
-using FastPower: fastlog2, fastpower
 using Test
 
 const GROUP = get(ENV, "GROUP", "All")
+
+if GROUP == "QA"
+    using Pkg
+    Pkg.activate(joinpath(@__DIR__, "qa"))
+    Pkg.instantiate()
+    include(joinpath(@__DIR__, "qa", "qa.jl"))
+end
+
+if GROUP == "All" || GROUP == "Core" || GROUP == "Enzyme"
+    using FastPower
+    using FastPower: fastlog2, fastpower
+end
 
 if GROUP == "All" || GROUP == "Core"
     @testset "Fast log2" begin
