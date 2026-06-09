@@ -40,9 +40,10 @@ Enzyme = "7da242da-08ed-463a-9acd-ee780be4f1d9"
 EnzymeTestUtils = "12d8515a-0907-448a-8884-5fe00fdf1c5a"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 Mooncake = "da2b9cff-9c12-43a0-ae48-6db2b0edb7d6"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 ReverseDiff = "37e2e3b7-166d-5795-8a7a-e32c996b4267"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 Tracker = "9f7883ad-71c0-57eb-9f7f-b5c9e6d3789c"
 
 [targets]
-test = ["Test", "Enzyme", "EnzymeTestUtils", "ForwardDiff", "Mooncake", "ReverseDiff", "Tracker"]
+test = ["Test", "Enzyme", "EnzymeTestUtils", "ForwardDiff", "Mooncake", "Pkg", "ReverseDiff", "Tracker"]
