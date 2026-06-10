@@ -1,4 +1,6 @@
 using Test
+using ForwardDiff, ReverseDiff, Tracker, Mooncake
+using Enzyme, EnzymeTestUtils
 
 const GROUP = get(ENV, "GROUP", "All")
 
@@ -34,8 +36,6 @@ if GROUP == "All" || GROUP == "Core"
         @test maximum(errors) < 1.0e-2
     end
 
-    using ForwardDiff, ReverseDiff, Tracker, Mooncake
-
     function mooncake_derivative(f, x)
         return Mooncake.value_and_gradient!!(Mooncake.build_rrule(f, x), f, x)[2][2]
     end
@@ -54,8 +54,6 @@ if GROUP == "All" || GROUP == "Core"
 end
 
 if GROUP == "All" || GROUP == "Enzyme"
-    using Enzyme, EnzymeTestUtils
-
     @testset "Fast pow - Enzyme forward rule" begin
         @testset for RT in (Duplicated, DuplicatedNoNeed),
                 Tx in (Const, Duplicated),
