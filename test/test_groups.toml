@@ -1,6 +1,9 @@
 [Core]
 versions = ["lts", "1", "pre"]
 
+[AD]
+versions = ["lts", "1"]
+
 [Enzyme]
 versions = ["lts", "1"]
 

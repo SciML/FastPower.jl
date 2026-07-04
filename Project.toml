@@ -25,7 +25,6 @@ FastPowerTrackerExt = "Tracker"
 
 [compat]
 Enzyme = "0.13.89"
-EnzymeTestUtils = "0.2"
 ForwardDiff = "0.10, 1"
 Measurements = "2.5"
 MonteCarloMeasurements = "1"
@@ -33,22 +32,14 @@ Mooncake = "0.4, 0.5"
 ReverseDiff = "1.14"
 SafeTestsets = "0.1, 1"
 SciMLTesting = "1"
-StableRNGs = "1"
 Test = "1"
 Tracker = "0.2"
 julia = "1.10"
 
 [extras]
-Enzyme = "7da242da-08ed-463a-9acd-ee780be4f1d9"
-EnzymeTestUtils = "12d8515a-0907-448a-8884-5fe00fdf1c5a"
-ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
-Mooncake = "da2b9cff-9c12-43a0-ae48-6db2b0edb7d6"
-ReverseDiff = "37e2e3b7-166d-5795-8a7a-e32c996b4267"
 SafeTestsets = "1bc83da4-3b8d-516f-aca4-4fe02f6d838f"
 SciMLTesting = "09d9d899-5365-40a9-917a-5f67fddea283"
-StableRNGs = "860ef19b-820b-49d6-a774-d7a799459cd3"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-Tracker = "9f7883ad-71c0-57eb-9f7f-b5c9e6d3789c"
 
 [targets]
-test = ["Enzyme", "EnzymeTestUtils", "ForwardDiff", "Mooncake", "ReverseDiff", "SafeTestsets", "SciMLTesting", "StableRNGs", "Test", "Tracker"]
+test = ["SafeTestsets", "SciMLTesting", "Test"]
