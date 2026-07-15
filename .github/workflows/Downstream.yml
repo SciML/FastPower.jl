@@ -26,7 +26,6 @@ jobs:
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: Integrators_II}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: Regression_I}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: Regression_II}
-          - {user: SciML, repo: SimpleDiffEq.jl, group: Core}
     uses: "SciML/.github/.github/workflows/downstream.yml@v1"
     with:
       julia-version: "${{ matrix.julia-version }}"
