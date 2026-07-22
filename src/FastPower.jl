@@ -1,5 +1,7 @@
 module FastPower
 
+export fastpower
+
 # From David Goldberg's blog post with minor modifications
 # https://tech.ebayinc.com/engineering/fast-approximate-logarithms-part-iii-the-formulas/
 @inline function fastlog2(x::Float32)::Float32
@@ -30,8 +32,22 @@ module FastPower
 end
 
 """
-    fastpower(x::T, y::T) where {T} -> float(T)
-    Trips through Float32 for performance.
+    fastpower(x::Real, y::Real) -> AbstractFloat
+
+Compute an approximate floating-point value of ``x^y`` quickly.
+
+`fastpower` evaluates its approximation through a `Float32` logarithm polynomial, trading
+accuracy for speed. It is intended for nonnegative bases and exponents when a few digits of
+accuracy are sufficient. Inputs that are not both `Real` use Julia's ordinary `^` operation.
+
+## Examples
+
+```jldoctest
+julia> using FastPower
+
+julia> fastpower(1.0, 1.0)
+1.0
+```
 """
 @inline function fastpower(x::T, y::T) where {T <: Real}
     outT = float(T)
