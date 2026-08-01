@@ -1,7 +1,7 @@
 module FastPowerMonteCarloMeasurementsExt
 
-using FastPower
-using MonteCarloMeasurements
+using FastPower: FastPower
+using MonteCarloMeasurements: MonteCarloMeasurements
 
 @inline function FastPower.fastpower(
         x::MonteCarloMeasurements.AbstractParticles,

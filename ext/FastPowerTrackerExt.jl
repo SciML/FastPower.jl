@@ -1,6 +1,8 @@
 module FastPowerTrackerExt
 
-using FastPower, Tracker
+using FastPower: FastPower
+using Tracker: Tracker
+
 FastPower.fastpower(x::Tracker.TrackedReal, y::Tracker.TrackedReal) = x^y
 
 end
