@@ -4,6 +4,7 @@ authors = ["Chris Rackauckas <accounts@chrisrackauckas.com>"]
 version = "1.4.1"
 
 [deps]
+PrecompileTools = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
 
 [weakdeps]
 Enzyme = "7da242da-08ed-463a-9acd-ee780be4f1d9"
@@ -29,6 +30,7 @@ ForwardDiff = "0.10, 1"
 Measurements = "2.5"
 MonteCarloMeasurements = "1"
 Mooncake = "0.4, 0.5"
+PrecompileTools = "1.2"
 ReverseDiff = "1.14"
 SafeTestsets = "0.1, 1"
 SciMLTesting = "2.4"

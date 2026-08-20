@@ -65,4 +65,15 @@ end
 
 fastpower(x, y) = x^y
 
+using PrecompileTools: @compile_workload, @setup_workload
+
+@setup_workload begin
+    @compile_workload begin
+        fastpower(1.25f0, 0.5f0)
+        fastpower(1.25, 2.0)
+        fastpower(0.0, 2.0)
+        fastpower(ComplexF64(1.25), 2.0)
+    end
+end
+
 end
