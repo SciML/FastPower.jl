@@ -21,7 +21,6 @@ jobs:
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: InterfaceII}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: InterfaceIII}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: InterfaceIV}
-          - {user: SciML, repo: OrdinaryDiffEq.jl, group: InterfaceV}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: Integrators_I}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: Integrators_II}
           - {user: SciML, repo: OrdinaryDiffEq.jl, group: Regression_I}
