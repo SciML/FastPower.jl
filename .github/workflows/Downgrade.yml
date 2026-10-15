@@ -12,7 +12,15 @@ on:
       - 'docs/**'
 jobs:
   test:
+    strategy:
+      fail-fast: false
+      matrix:
+        group:
+          - Core
+          - AD
+          - Enzyme
     uses: "SciML/.github/.github/workflows/downgrade.yml@v1"
     with:
       julia-version: "lts"
+      group: "${{ matrix.group }}"
     secrets: "inherit"
