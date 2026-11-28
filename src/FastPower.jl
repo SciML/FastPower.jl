@@ -14,19 +14,25 @@ export fastpower
     # IEEE is sgn(1):exp(8):frac(23) representing
     # (1+frac)*2^(exp-127). 1+frac is called the significand
 
-    # get exponent
-    ux1i = reinterpret(UInt32, x)
-    exp = Int32((ux1i & 0x7F800000) >> 23)
-    # actual exponent is exp-127, will subtract later
-
-    if iszero(ux1i & 0x00400000) # if signif > 1.5
-        ux2i = (ux1i & 0x007FFFFF) | 0x3f800000
-        exp -= 0x7f # 127
+    bits = reinterpret(UInt32, x)
+    biased_exponent = (bits >> 23) & 0xff
+    upper_half = !iszero(bits & 0x00400000)
+    twice_significand = if 0 < biased_exponent < 0xff
+        # Twice the reciprocal power of two stays normal across the Float32 range.
+        scale = ldexp(1.0f0, Int32(128) - Int32(biased_exponent))
+        abs(x) * scale
     else
-        ux2i = (ux1i & 0x007FFFFF) | 0x3f000000
-        exp -= 0x7e # 126 instead of 127 compensates for division by 2
+        bits_fraction = Float32(bits & 0x007fffff) * (2 * eps(Float32))
+        if iszero(biased_exponent)
+            scaled = abs(x) * ldexp(1.0f0, 127)
+            # The fraction bits preserve the primal when the device flushes subnormals.
+            2.0f0 + ifelse(iszero(scaled), bits_fraction, scaled)
+        else
+            2.0f0 + bits_fraction
+        end
     end
-    signif = reinterpret(Float32, ux2i)
+    signif = twice_significand * ifelse(upper_half, 0.25f0, 0.5f0)
+    exp = Int32(biased_exponent) - Int32(127) + upper_half
     quot = muladd(signif, a, b) / (signif + c)
     return muladd(signif - 1.0f0, quot, exp)
 end
